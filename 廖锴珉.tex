@@ -1,0 +1,174 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=13mm,top=11mm,bottom=11mm]{geometry}
+\usepackage{ctex}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip=0pt plus 1pt
+\usepackage{xcolor}
+\definecolor{ink}{HTML}{172B3A}
+\definecolor{accent}{HTML}{1A656C}
+\definecolor{muted}{HTML}{576875}
+\definecolor{rulegray}{HTML}{D8E0E4}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,urlcolor=accent,linkcolor=accent,pdftitle={廖锴珉 - 三维重建与 GPU 性能优化},pdfauthor={廖锴珉}}
+\usepackage{enumitem}
+\setlist[itemize,1]{before=\fontsize{10}{10}\selectfont, leftmargin=30pt, label=\textbullet, itemsep=1.3pt, topsep=1.5pt, parsep=0pt, partopsep=0pt}
+\setlist[itemize,2]{before=\fontsize{10}{10}\selectfont, leftmargin=30pt,label={\textcolor{accent}{\scriptsize\textbullet}},itemsep=1pt,topsep=1pt,parsep=0pt,partopsep=0pt}
+\usepackage{needspace}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+\setlength{\emergencystretch}{2em}
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\raggedbottom
+\color{ink}
+
+\newcommand{\ressection}[1]{
+    \par 
+    \vspace{5pt}
+    {\color{accent} \fontsize{13}{13}\selectfont \bfseries #1}\par\vspace{-10pt}{\color{rulegray}\rule{\linewidth}{0.5pt}} 
+    \par 
+    \vspace{-5pt}}
+    
+\newcommand{\company}[2]{
+    \par \vspace{10pt}
+    {\fontsize{11}{11}\selectfont\bfseries #1}
+    \hfill
+    {\color{muted}\fontsize{10}{10}\selectfont #2}
+    \par}
+
+\newcommand{\project}[1]{
+    \par
+    \vspace{5pt}
+    {\fontsize{10}{10}\selectfont \bfseries \hspace{10pt} #1}
+    \par}
+
+\newcommand{\meta}[1]{
+    \par
+    \vspace{-5pt}
+    {\color{muted}\fontsize{10}{10}\selectfont \hspace{10pt} #1}
+    \par}
+    
+\begin{document}
+
+{\fontsize{20}{20}\selectfont\bfseries 廖锴珉}\par
+{\fontsize{8.6}{11.5}\selectfont 电话：18069772247\enspace |\enspace 邮箱：\href{mailto:314863230@qq.com}{314863230@qq.com}\enspace |\enspace GitHub：\href{https://github.com/KaiminLiao}{(1)}\enspace\href{https://github.com/liaoKM}{(2)}}\par
+\vspace{-10pt}{\color{accent}\rule{\linewidth}{1pt}}\par
+
+\ressection{教育经历}
+\company{\textbf{深圳大学 | 计算机科学与技术}} {硕士：2019.09—2022.06 | 本科：2015.09—2019.06}
+\begin{itemize}
+\item 2018世界大学生超级计算机竞赛二等奖，队长
+\item 2017英特尔杯并行应用挑战赛铜奖，队长。
+\item 本科获推免资格，多次获奖学金。
+\end{itemize}
+
+\ressection{个人简介}
+专注\textbf{三维重建}与\textbf{GPU性能优化}，主导并独立完成\textbf{LiteGS}训练框架及核心算法，具备从可微渲染、CUDA 算子优化到 DX12 和 UE 实时渲染的完整开发经验。工程经验丰富，注重工程落地。具备算法研究到落地性能的全链路研发能力。\par
+5年以上 \textbf{CUDA性能优化} 经历。\textbf{熟悉UE引擎}，独立完成过编译、Gameplay、渲染插件的开发。有CV和CG方向的 \textbf{深度学习} 项目经历。有多机异构平台的优化加速经历（OpenMP+MPI、Intel MIC 计算卡）\par
+
+\ressection{论文}
+{\fontsize{10}{10}\selectfont Liao K, Wang H, Chen Z, et al. LiteGS: A high-performance framework to train 3DGS in subminutes via system and algorithm codesign[C]//European Conference on Computer Vision. Cham: Springer Nature Switzerland, 2026: 574-591.\par}
+
+{\fontsize{10}{10}\selectfont Wang L, Liao K, Ren Q, et al. ReorgGS: Equivalent Distribution Reorganization for 3D Gaussian Splatting[J]. arXiv preprint arXiv:2605.08739, 2026. (NeurIPS接收)\par}
+
+{\fontsize{10}{10}\selectfont Gan Z, Sun W, Liao K, et al. Probabilistic modeling for image registration using radial basis functions: Application to cardiac motion estimation[J]. IEEE Transactions on Neural Networks and Learning Systems, 2022, 34(10): 7324-7338.\par}
+
+{\fontsize{10}{10}\selectfont Liao K, Gan Z, Yang X. Semi-supervised Learning Based Right Ventricle Segmentation Using Deep Convolutional Boltzmann Machine Shape Model[C]//International Conference on Artificial Neural Networks. Cham: Springer International Publishing, 2021: 585-597.\par}
+
+\ressection{工作与项目经历}
+\company{摩尔线程 | UE 工程师 / AI Infra（三维重建与渲染方向）}{2023.03—至今}
+    \project{\textbf{LiteGS：高性能三维重建训练框架（项目主导\&独立开发）}}
+    \meta{\href{https://github.com/MooreThreads/LiteGS}{GitHub} | C++、Python、CUDA、Pytorch、硬件算法协同}
+    \begin{itemize}
+    \item \textbf{全链路独立交付}：主导并独立完成算法设计、训练框架、核心 CUDA 算子、性能优化和实验验证
+    \begin{itemize}
+    \item 设计并拆分3DGS渲染算子，提供 Script\&Autograd 与 CUDA extension 双 API，支持重建算法快速迭代与高性能训练。重新设计tensor维度排布，以确保script实现也具有相对合理的性能。
+    \item 维护空间一致性并构建AABB，实现训练阶段高效剔除。提升几乎所有算子的IO表现，尤其是稀疏梯度更新。
+    \item Nsight System定位空泡，消除小算子，消除memcpy导致的同步。借助feedback buffer实现完全异步的训练。
+    \item Nsight Compute定位raster算子的性能问题，分析stall逐个处理瓶颈。提出one-warp-per-tile的3dgs raster结构，处理原子加问题。根据register用量倒推raster tilesize，确保占用率最优。借助扫描线算法进一步减少计算，局部借助fp16减少寄存器使用，基本打满Compute Throughput（90\%+）
+    \item 构建frame cache，记录对应视角的渲染信息，实验计算结果的复用或指导tile负载均衡。
+    \end{itemize}
+    \item \textbf{效果}：RTX 3090 上，相对原始 3DGS 最高实现 \textbf{20× 端到端加速}，重建时间突破1分钟大关。RTX4090上，重建时间约30s。同等规模参数下，重建精度优于当前绝大多数方案。
+    \item \textbf{项目成果}
+    \begin{itemize}
+    \item \href{https://github.com/MooreThreads/LiteGS}{GitHub} | \textbf{400+ Stars }  
+    \item \href{https://link.springer.com/chapter/10.1007/978-3-032-37422-6_33}{ECCV2026}
+    \item \href{https://gaplab.cuhk.edu.cn/projects/gsRaceSIGA2025/index.html}{SIGGRAPH Asia 3DGS Challenge} 二等奖
+    \end{itemize}
+    \item \textbf{项目论文}：\href{https://arxiv.org/abs/2503.01199}{LiteGS: A High-performance Framework to Train 3DGS in Subminutes via System and Algorithm Codesign}
+    \end{itemize}
+
+    \newpage
+    
+    \project{\textbf{DX12 3DGS 渲染器}}
+    \meta{\href{https://github.com/MooreThreads/TurboSplat-Viz}{GitHub} | C++、DX12、Mesh Shader}
+    \begin{itemize}
+    \item 主导并独立开发基于 DX12 Mesh Shader 的 3DGS 预览器，相比 CUDA 方案实现 \textbf{2.0–3.0× 加速}，RTX 3070 上 1080p 渲染达到 \textbf{300 FPS 以上}。
+    \item 开展摩尔线程 S80 显卡上的渲染性能优化与画面表现差异分析。
+    \end{itemize}
+    
+    \project{\textbf{UE5 3DGS 渲染插件（支持光照、材质蓝图）}}
+    \meta{\href{https://github.com/liaoKM/3DGS-UE5-Plugin}{GitHub} | C++、UE5}
+    \begin{itemize}
+    \item 独立开发 UE 3DGS 渲染插件：扩展Vertex Factory和全局OIT，实现基于MeshBatch的3DGS渲染版本，支持部分材质属性与光照。
+    \end{itemize}
+    
+    \project{\textbf{Neural Radiance Cache开发}}
+    \meta{C++、HLSL}
+    \begin{itemize}
+    \item 复现NVIDIA NRC项目，通过tensor core加速path tracing。
+    \end{itemize}
+    
+    \project{\textbf{开发UE Python插件}}
+    \meta{C++、UE5}
+    \begin{itemize}
+    \item 改造 UE5 PythonScriptPlugin，实现打包应用内嵌Python。打通端侧pytorch模型与Editor开发，打通端侧pytorch与Gameplay链路。
+    \item 实现 UePythonMVVM 双向绑定框架，剥离干净的纯python开发环境，基于双向绑定完成数字人前端驱动。
+    \item 承担早期UE5维护工作。包括Fastbuild部署，引擎分发，包体分发，BuildBot自动构建等。
+    \item 开展摩尔线程 S80 显卡上的渲染性能优化与画面表现差异分析。
+    \end{itemize}
+
+\company{网易互娱 | 游戏引擎工程师（战趣工作室）}{2022.07—2023.03}
+\project{\textbf{UE4 ECS 插件（支持大量单位运行）}}
+\meta{\href{https://github.com/liaoKM/AvxBitmapECS/tree/master}{Toy Level Code} | C++、UE4、AVX指令优化}
+\begin{itemize}
+\item \textbf{独立交付} ：为校招培训MiniGame项目完成ECS插件，以支持大量单位的逻辑运算
+\begin{itemize}
+\item \textbf{早期构建toy模型验证可行性确保落地}，将ECS框架以SubSystem插件形式加入到项目中。
+\item 借助ECS框架完成大量单位Gameplay相关的逻辑运算，通过AVX指令集加速相关运算。
+\item 在ECS框架下，实现简单的碰撞规避算法Boids。
+\item 简单的性能调优,如，为场景去除动态光照，禁用部分动画等
+\end{itemize}
+\item \textbf{成果}：MiniGame程序组前三
+\end{itemize}
+\project{\textbf{上线项目Hyper Front的开发}}
+\meta{C++、Python、UE4}
+\begin{itemize}
+\item 局外系统开发
+\item 实现Blueprint到python script映射框架，提升开发效率
+\begin{itemize}
+\item 实现由 UMG Editor 映射生成 Python 模板文件，支持UI与业务逻辑衔接。
+\item 在UI组件重命名、新增、删除后快速更新对应的python文件。
+\item 在python中为蓝图生成的动态类添加成员注释，确保IDE自动提示功能正常运作。
+\end{itemize}
+\end{itemize}
+\company{网易互娱 | 游戏开发工程师实习生（梦幻事业部·倚天工作室）}{2021.07—2021.08}
+\project{\textbf{FastBuild扩展改造}}
+\begin{itemize}
+\item \textbf{独立交付} ： 改进分布式编译工具FastBuild，实现链接任务分发。
+\begin{itemize}
+\item 优化任务队列，解决worker机器链接任务密集导致的IO瓶颈
+\item 使用开源C++预处理器魔改，解决MSVC远程编译任务PCH禁用问题
+\item 设计 Windows SDK / VC 工具链环境缓存机制，避免Fastbuild重复分发
+\end{itemize}
+\item \textbf{项目成果}：获“暑期实习优秀新人奖”。
+\end{itemize}
+\company{深圳市莫廷影像技术有限公司 | CUDA 工程师实习生}{2018.11—2019.09}
+\project{多帧叠加降噪算法加速}
+\begin{itemize}
+\item 优化 OCT 视网膜图像多帧叠加降噪算法，通过 CUDA 与 CPU 并行优化实现 \textbf{50× 加速}。
+\item 实现 CUDA 异步流与基础内存池，优化 OpenMP 并行执行与 CPU 性能。
+\item 研究学习内存池相关内容，实现\href{https://github.com/liaoKM/myMalloc}{Toy Level 内存池}
+\end{itemize}
+\end{document}
